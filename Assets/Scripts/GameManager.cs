@@ -11,11 +11,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] public string playerName;
     public GameObject inputField;
-    /*
-    public int highScore;
-    public string highScoreName;
-    */
-   
+
     
     
     
@@ -35,17 +31,7 @@ public class GameManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
         
-    // This singleton code will not let the name be changed between scenes, but does store the name and high score - moved to ScoreManager
-    /*
-        if (Instance != null)
-    {
-        Destroy(gameObject);
-        return;
-    }
-    
-    DontDestroyOnLoad(this);
-    Instance = this;
-    */
+
     }
     
 
@@ -54,16 +40,6 @@ public class GameManager : MonoBehaviour
         playerName = inputField.GetComponent<Text>().text;
 
     }
-    /*
-    public void CheckHighScore(int points)
-    {
-        if (points > highScore)
-        {
-            highScore = points;
-            highScoreName = playerName;
-        }
-    }
-    */
 
  
 }

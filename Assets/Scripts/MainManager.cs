@@ -83,7 +83,7 @@ public class MainManager : MonoBehaviour
     {
         m_GameOver = true;
         GameOverText.SetActive(true);
-        //m_highScoreText.text = "Best Score: " + GameManager.Instance.highScore + " Name: " + GameManager.Instance.highScoreName;
+        
     }
 
     public void StartNew()
