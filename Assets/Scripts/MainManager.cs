@@ -11,20 +11,24 @@ public class MainManager : MonoBehaviour
     public Rigidbody Ball;
 
     public Text ScoreText;
+    public Text m_playerName;
     public GameObject GameOverText;
+    public Text m_highScoreText;
     
     private bool m_Started = false;
-    private int m_Points;
+    public int m_Points;
+    int m_highScore;
     
     private bool m_GameOver = false;
 
-    
     // Start is called before the first frame update
     void Start()
     {
+        m_highScoreText.text = "Best Score: " + ScoreManager.Instance.highScore + " Name: " + ScoreManager.Instance.highScoreName;
+
         const float step = 0.6f;
         int perLine = Mathf.FloorToInt(4.0f / step);
-        
+                
         int[] pointCountArray = new [] {1,1,2,2,5,5};
         for (int i = 0; i < LineCount; ++i)
         {
@@ -36,6 +40,11 @@ public class MainManager : MonoBehaviour
                 brick.onDestroyed.AddListener(AddPoint);
             }
         }
+        if (GameManager.Instance != null)
+        {
+            m_playerName.text = "Player: " + GameManager.Instance.playerName;
+        }
+
     }
 
     private void Update()
@@ -55,6 +64,8 @@ public class MainManager : MonoBehaviour
         }
         else if (m_GameOver)
         {
+            ScoreManager.Instance.CheckHighScore(m_Points);
+
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
@@ -72,5 +83,13 @@ public class MainManager : MonoBehaviour
     {
         m_GameOver = true;
         GameOverText.SetActive(true);
+        //m_highScoreText.text = "Best Score: " + GameManager.Instance.highScore + " Name: " + GameManager.Instance.highScoreName;
     }
+
+    public void StartNew()
+    {
+        SceneManager.LoadScene(0);
+    }
+    
+
 }
